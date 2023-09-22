@@ -32,6 +32,7 @@
 import cv2
 import numpy as np
 import pkg_resources
+import gc
 
 from mtcnn.exceptions import InvalidImage
 from mtcnn.network.factory import NetworkFactory
@@ -340,6 +341,7 @@ class MTCNN(object):
             img_y = np.transpose(img_x, (0, 2, 1, 3))
 
             out = self._pnet(img_y)
+            gc.collect()
 
             out0 = np.transpose(out[0], (0, 2, 1, 3))
             out1 = np.transpose(out[1], (0, 2, 1, 3))
@@ -408,6 +410,7 @@ class MTCNN(object):
         tempimg1 = np.transpose(tempimg, (3, 1, 0, 2))
 
         out = self._rnet(tempimg1)
+        gc.collect()
 
         out0 = np.transpose(out[0])
         out1 = np.transpose(out[1])
@@ -464,6 +467,7 @@ class MTCNN(object):
         tempimg1 = np.transpose(tempimg, (3, 1, 0, 2))
 
         out = self._onet(tempimg1)
+        gc.collect()
         out0 = np.transpose(out[0])
         out1 = np.transpose(out[1])
         out2 = np.transpose(out[2])
