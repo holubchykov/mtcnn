@@ -409,7 +409,7 @@ class MTCNN(object):
         tempimg = (tempimg - 127.5) * 0.0078125
         tempimg1 = np.transpose(tempimg, (3, 1, 0, 2))
 
-        out = self._rnet.predict(tempimg1, training=False)
+        out = self._rnet(tempimg1, training=False)
         # _ = gc.collect()
 
         out0 = np.transpose(out[0])
@@ -466,7 +466,7 @@ class MTCNN(object):
         tempimg = (tempimg - 127.5) * 0.0078125
         tempimg1 = np.transpose(tempimg, (3, 1, 0, 2))
 
-        out = self._onet.predict(tempimg1, training=False)
+        out = self._onet(tempimg1, training=False)
         # _ = gc.collect()
         out0 = np.transpose(out[0])
         out1 = np.transpose(out[1])
